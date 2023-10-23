@@ -12,3 +12,7 @@ def getRequest():
 def index():
     myQuery = getParams(request.url)
 ##end
+@app.route('/api/')
+def api():
+    myQuery = getParams(request.url)
+##end
