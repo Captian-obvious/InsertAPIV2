@@ -89,7 +89,7 @@ class META:
     def __init__(self):
         self.Data = {}
     ##end
-    def deserialize(self, stream: BinaryStream, file: BinaryRobloxFile):
+    def deserialize(self, stream: BinaryStream, file):
         (numEntries,) = stream.unpack("<i")
         for i in range(numEntries):
             key = stream.read_string()
