@@ -176,7 +176,7 @@ class INST:
 ##end
 @dataclass
 class PROP:
-    File: BinaryRobloxFile = None
+    File = None
     Name: str = ""
     ClassIndex: int = -1
     Type: PropertyType = PropertyType.Unknown
