@@ -185,18 +185,17 @@ class PROP:
     Name: str = ""
     ClassIndex: int = -1
     Type: PropertyType = PropertyType.Unknown
-
     @property
     def Class(self):
         return self.File.Classes[self.ClassIndex]
-
+    ##end
     @property
     def ClassName(self):
         return self.Class.ClassName if self.Class else "UnknownClass"
-
+    ##end
     def __str__(self):
         return f"{self.Type} {self.ClassName}.{self.Name}"
-
+    ##end
     def deserialize(self, stream: BinaryStream, file: RobloxBinaryFile):
         self.File = file
         (self.ClassIndex,) = stream.unpack("<i")
@@ -210,19 +209,7 @@ class PROP:
         ), f"Unknown class index {self.ClassIndex} (@ {self})!"
         ids = self.Class.InstanceIds
         instCount = self.Class.NumInstances
-
-
-"""
-    var
-    props = new
-    Property[instCount];
-
-    for (int i = 0; i < instCount; i++)
-    {
-        int
-    id = ids[i];
-    Instance
-    instance = File.Instances[id];
+    ##end
 
     if (instance == null)
         {
