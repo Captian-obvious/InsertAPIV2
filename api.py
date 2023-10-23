@@ -1,5 +1,5 @@
 #Modules & Flask
-import base64,requests,robloxapi
+import base64,compiler,os,sys,requests,robloxapi
 from flask import Flask,jsonify,request
 #DEFINE APP
 app = Flask(__name__)
@@ -19,6 +19,12 @@ def api():
 @app.route('/compiler.py')
 def compilerPage():
     myQuery = getParams(request.url)
+    if (myQuery!=None):
+        datq = myQuery[0]
+        if (datq!=None):
+            
+        ##endif
+    ##endif
 ##end
 #Server stuff
 def getParams(url):
