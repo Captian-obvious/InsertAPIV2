@@ -180,31 +180,30 @@ class PROP:
     Name: str = ""
     ClassIndex: int = -1
     Type: PropertyType = PropertyType.Unknown
-
     @property
     def Class(self):
         return self.File.Classes[self.ClassIndex]
-
+    ##end
     @property
     def ClassName(self):
         return self.Class.ClassName if self.Class else "UnknownClass"
-
+    ##end
     def __str__(self):
         return f"{self.Type} {self.ClassName}.{self.Name}"
-
+    ##end
     def deserialize(self, stream: BinaryStream, file: RobloxBinaryFile):
         self.File = file
         (self.ClassIndex,) = stream.unpack("<i")
         self.Name = stream.read_string()
-
         (propType,) = stream.unpack("<b")
         self.Type = PropertyType(propType)
-
         assert (
             self.Class is not None
         ), f"Unknown class index {self.ClassIndex} (@ {self})!"
         ids = self.Class.InstanceIds
         instCount = self.Class.NumInstances
+    ##end
+##end
 
 
 class BinaryRobloxFileChunk:
@@ -223,15 +222,15 @@ class BinaryRobloxFileChunk:
         self.HasWriteBuffer = False
         self.WriteBuffer = bytearray()
         self.Handler = None
-
+    ##end
     @property
     def HasCompressedData(self):
         return self.CompressedSize > 0
-
+    ##end
     def __str__(self):
         chunkType = self.ChunkType.replace(b"\0", b" ")
         return f"'{chunkType}' Chunk ({self.Size} bytes) [{self.Handler}]"
-
+    ##end
     def deserialize(self, stream: BinaryStream):
         (
             self.ChunkType,
@@ -246,6 +245,9 @@ class BinaryRobloxFileChunk:
             # print(self.Data)
         else:
             self.Data = stream.read_bytes(self.Size)
+        ##endif
+    ##end
+##end
 
 
 class BinaryRobloxFile(Instance):  # (RobloxFile):
@@ -272,15 +274,15 @@ class BinaryRobloxFile(Instance):  # (RobloxFile):
         self.Name = "Bin:"
         self.Referent = "-1"
         self.ParentLocked = True
-
+    ##end
     @property
     def Chunks(self):
         return self.ChunksImpl
-
+    ##end
     @property
     def HasMetadata(self):
         return self.META is not None
-
+    ##end
     @property
     def Metadata(self):
         return self.META.Data if self.META else {}
