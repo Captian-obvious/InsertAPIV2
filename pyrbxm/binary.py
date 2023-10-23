@@ -191,7 +191,7 @@ class PROP:
     def __str__(self):
         return f"{self.Type} {self.ClassName}.{self.Name}"
     ##end
-    def deserialize(self, stream: BinaryStream, file: RobloxBinaryFile):
+    def deserialize(self, stream: BinaryStream, file):
         self.File = file
         (self.ClassIndex,) = stream.unpack("<i")
         self.Name = stream.read_string()
