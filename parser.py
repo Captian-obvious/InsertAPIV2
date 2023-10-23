@@ -4,9 +4,9 @@ from api import app,getRequest
 def parse(file):
     parsedString = ""
     f = pyrbxm.read(file)
-    for object in f.Objects:
-        if (isInstance(object)):
-            parseInstance(object)
+    ##for object in f.Objects:
+    ##    if (isinstance(object)):
+    ##        parseInstance(object)
         ##endif
     ##end
 ##end
