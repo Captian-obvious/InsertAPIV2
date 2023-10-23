@@ -43,3 +43,11 @@ def getParams(url):
     ##endif
     return params
 ##end
+
+class insertserver:
+    def downloadAsset(assetid):
+        url = 'https://assetdelivery.roblox.com/v1/asset/?id='+assetid
+        req = requests.get(url)
+        
+    ##end
+##end
