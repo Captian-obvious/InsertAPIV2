@@ -22,7 +22,14 @@ def compilerPage():
     if (myQuery!=None):
         datq = myQuery[0]
         if (datq!=None):
-            
+            s = datq.split('=')
+            if (s!=None and len(s)>1):
+                data = s[1]
+                parsedJSON = compiler.parse(data)
+                if parsedJSON!=None:
+                    return jsonify(parsedJSON)
+                ##endif
+            ##endif
         ##endif
     ##endif
 ##end
