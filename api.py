@@ -46,8 +46,9 @@ class insertserver:
         req = requests.get(url)
         if (req.status_code==200):
             rawData = req.content
-            asset = open('api/assets/v1/'+assetid)
-            
+            asset = open('api/assets/v1/'+assetid,'wb')
+            asset.write(bytearray(rawData))
+            return asset
         ##endif
     ##end
 ##end
