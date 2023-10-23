@@ -123,25 +123,20 @@ class INST:
     ##end
     def __str__(self):
         return f"{self.ClassIndex}: {self.ClassName}x{self.NumInstances}"
-
+    ##end
     def deserialize(self, stream: BinaryStream, file: BinaryRobloxFile):
         (self.ClassIndex,) = stream.unpack("<i")
         self.ClassName = stream.read_string()
         self.IsService, self.NumInstances = stream.unpack("<bi")
         self.InstanceIds = stream.read_instance_ids(self.NumInstances)
         file.Classes[self.ClassIndex] = self
-
-        # Type instType = Type.GetType($"RobloxFiles.{ClassName}");
-        # if instType is None:
-        #     RobloxFile.LogError($"INST - Unknown class: {ClassName} while reading INST chunk.");
-        #     return;
-
         if self.IsService:
             self.RootedServices = []
             for i in range(self.NumInstances):
                 isRooted = stream.unpack("<b")
                 self.RootedServices.append(isRooted)
-
+            ##end
+        ##endif
         for i in range(self.NumInstances):
             instId = self.InstanceIds[i]
             # inst = Activator.CreateInstance(instType) as Instance;
@@ -151,8 +146,9 @@ class INST:
             if self.IsService:
                 isRooted = self.RootedServices[i]
                 inst.Parent = file if isRooted else None
+            ##endif
             file.Instances[instId] = inst
-
+        ##end
         def serialize(self, stream: BinaryStream, file: BinaryRobloxFile):
             stream.pack("<i", self.ClassIndex)
             stream.write_string(self.ClassName)
@@ -163,19 +159,21 @@ class INST:
                     # Instance service = file.Instances[instId];
                     # writer.Write(service.Parent == file);
                     stream.pack("<b", False)
-
+                ##end
+            ##endif
+        ##end
         def dump(self):
             print(f"- ClassIndex:   {self.ClassIndex}")
             print(f"- ClassName:    {self.ClassName}")
             print(f"- IsService:    {self.IsService}")
-
             if self.IsService and self.RootedServices is not None:
                 print(f"- RootedServices: `{', '.join(self.RootedServices)}`")
-
+            ##endif
             print(f"- NumInstances: {self.NumInstances}")
             print(f"- InstanceIds: `{', '.join(self.InstanceIds)}`")
-
-
+        ##end
+    ##end
+##end
 @dataclass
 class PROP:
     File: BinaryRobloxFile = None
