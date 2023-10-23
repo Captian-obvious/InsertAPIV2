@@ -4,6 +4,10 @@ from api import app,getRequest
 def parse(file):
     parsedString = ""
     f = rbxm.open(file)
-    
+    for (object in f.Objects):
+        if (isInstance(object)):
+            parseInstance(object)
+        ##endif
+    ##end
 ##end
 ##end
