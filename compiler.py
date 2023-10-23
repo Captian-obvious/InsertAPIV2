@@ -3,7 +3,7 @@ from api import app,getRequest
 ##class COMPILER:
 def parse(file):
     parsedString = ""
-    f = rbxm.open(file)
+    f = pyrbxm.read(file)
     for (object in f.Objects):
         if (isInstance(object)):
             parseInstance(object)
