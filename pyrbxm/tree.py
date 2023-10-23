@@ -50,7 +50,7 @@ class Instance:
     def __init__(self, ClassName):
 
         """A list of properties that are defined under this Instance."""
-        self.props: dict[str, Property] = {}
+        self.props = {}
         """ The raw list of children for this Instance. """
         self.Children: set[Instance] = set()
         """ The raw unsafe value of the Instance's parent. """
