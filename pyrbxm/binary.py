@@ -7,42 +7,40 @@ import numpy as np
 
 from .tree import PropertyType, Instance
 
-"""
-using RobloxFiles.Enums;
-using RobloxFiles.DataTypes;
-using RobloxFiles.Utility;
-"""
-
-
 # https://blog.roblox.com/2013/05/condense-and-compress-our-custom-binary-file-format/
 def decode_int(i):
     return (i >> 1) ^ (-(i & 1))
-
-
+##end
 def encode_int(i):
     return (i << 1) ^ (i >> 31)
-
-
+##end
 # http://stackoverflow.com/questions/442188/readint-readbyte-readstring-etc-in-python
 class BinaryStream:
     UINT32 = np.dtype(">i4")
     F32 = np.dtype(">f4")
     def __init__(self, base_stream):
         self.base_stream = base_stream
+    ##end
     def read_bytes(self, length) -> bytes:
         return self.base_stream.read(length)
+    ##end
     def write_bytes(self, value):
         self.base_stream.write(value)
+    ##end
     def unpack(self, fmt):
         return struct.unpack(fmt, self.read_bytes(struct.calcsize(fmt)))
+    ##end
     def pack(self, fmt, *data):
         return self.write_bytes(struct.pack(fmt, *data))
+    ##end
     def read_string(self):
         (length,) = self.unpack("<I")
         return self.read_bytes(length).decode("utf8")
+    ##end
     def write_string(self, s):
         self.pack("<I", len(s))
         self.write_bytes(s.encode("utf8"))
+    ##end
     # https://blog.roblox.com/2013/05/condense-and-compress-our-custom-binary-file-format/
     def read_interleaved(self, count: int, size: int = 4):
         return (
@@ -50,21 +48,27 @@ class BinaryStream:
             .reshape(size, count)
             .T.flatten()
         )
-
+    ##end
     def read_ints(self, count):
         return decode_int(self.read_interleaved(count).view(self.UINT32))
+    ##end
     def write_ints(self, values):
         self.pack(f"<{len(values)}f", *values)
+    ##end
     def read_floats(self, count):
         return self.read_ints(count).view(self.F32)
+    ##end
     def write_floats(self, values):
         self.pack(f"<{len(values)}f", *values)
+    ##end
     def read_instance_ids(self, count):
         """Reads and accumulates an interleaved buffer of integers."""
         return self.read_ints(count).cumsum()
+    ##end
     def write_instance_ids(self, values):
         """Accumulatively writes an interleaved array of integers."""
         self.write_ints(np.ediff1d(np.asarray(values), to_begin=values[0]))
+    ##end
     # http://stackoverflow.com/questions/32774910/clean-way-to-read-a-null-terminated-c-style-string-from-a-file
     def readCString(self):
         buf = bytearray()
@@ -74,9 +78,13 @@ class BinaryStream:
                 return buf
             else:
                 buf.extend(b)
+            ##endif
+        ##end
+    ##end
     def writeCString(self, string):
         self.write_bytes(string)
         self.write_bytes(b"\0")
+    ##end
 class META:
     def __init__(self):
         self.Data = {}
@@ -112,7 +120,7 @@ class INST:
         self.RootedServices = []
         self.NumInstances = 0
         self.InstanceIds = []
-
+    ##end
     def __str__(self):
         return f"{self.ClassIndex}: {self.ClassName}x{self.NumInstances}"
 
