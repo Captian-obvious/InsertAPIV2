@@ -286,23 +286,23 @@ class BinaryRobloxFile(Instance):  # (RobloxFile):
     @property
     def Metadata(self):
         return self.META.Data if self.META else {}
-
+    ##end
     @property
     def HasSharedStrings(self):
         return self.SSTR is not None
-
+    ##end
     @property
     def SharedStrings(self):
         return self.SSTR.Strings if self.SSTR else {}
-
+    ##end
     @property
     def HasSignatures(self):
         return self.SIGN is not None
-
+    ##end
     @property
     def Signatures(self):
         return self.SIGN.Signatures if self.SIGN else []
-
+    ##end
     def deserialize(self, file):
         stream = BinaryStream(file)
         # Verify the signature of the file.
@@ -311,7 +311,7 @@ class BinaryRobloxFile(Instance):  # (RobloxFile):
             raise ValueError(
                 "Provided file's signature does not match BinaryRobloxFile.MAGIC_HEADER!"
             )
-
+        ##endif
         # Read header data.
         (
             self.Version,
@@ -319,13 +319,10 @@ class BinaryRobloxFile(Instance):  # (RobloxFile):
             self.NumInstances,
             self.Reserved,
         ) = stream.unpack("<HIIq")
-
         # Begin reading the file chunks.
         reading = True
-
         self.Classes = [None] * self.NumClasses
         self.Instances = [None] * self.NumInstances
-
         while reading:
             chunk = BinaryRobloxFileChunk()
             chunk.deserialize(stream)
@@ -348,8 +345,13 @@ class BinaryRobloxFile(Instance):  # (RobloxFile):
                 self.LogError(
                     f"BinaryRobloxFile - Unhandled chunk-type: {chunk.ChunkType}!"
                 )
+            ##endif
             if handler:
                 chunk_stream = BinaryStream(BytesIO(chunk.Data))
                 chunk.Handler = handler
                 handler.deserialize(chunk_stream, self)
+            ##endif
             self.ChunksImpl.append(chunk)
+        ##end
+    ##end
+##end
