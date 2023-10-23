@@ -48,6 +48,10 @@ class insertserver:
     def downloadAsset(assetid):
         url = 'https://assetdelivery.roblox.com/v1/asset/?id='+assetid
         req = requests.get(url)
-        
+        if (req.status_code==200):
+            rawData = req.content
+            asset = open('api/assets/v1/'+assetid)
+            
+        ##endif
     ##end
 ##end
