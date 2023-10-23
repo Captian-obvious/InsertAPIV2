@@ -18,7 +18,7 @@ def api():
 ##end
 @app.route('/compiler.py')
 def compilerPage():
-    
+    myQuery = getParams(request.url)
 ##end
 #Server stuff
 def getParams(url):
