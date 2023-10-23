@@ -20,3 +20,12 @@ def api():
 def compilerPage():
     
 ##end
+#Server stuff
+def getParams(url):
+    params = None
+    query = url.split('?')[1]
+    if (query!=None):
+        params = query.split('&')
+    ##end
+    return params
+##end
