@@ -4,53 +4,41 @@ import struct
 from io import BytesIO
 from dataclasses import dataclass
 import numpy as np
-
 from .tree import PropertyType, Instance
-
-"""
-using RobloxFiles.Enums;
-using RobloxFiles.DataTypes;
-using RobloxFiles.Utility;
-"""
-
-
 # https://blog.roblox.com/2013/05/condense-and-compress-our-custom-binary-file-format/
 def decode_int(i):
     return (i >> 1) ^ (-(i & 1))
-
-
+##end
 def encode_int(i):
     return (i << 1) ^ (i >> 31)
-
-
+##end
 # http://stackoverflow.com/questions/442188/readint-readbyte-readstring-etc-in-python
 class BinaryStream:
     UINT32 = np.dtype(">i4")
     F32 = np.dtype(">f4")
-
     def __init__(self, base_stream):
         self.base_stream = base_stream
-
+    ##end
     def read_bytes(self, length) -> bytes:
         return self.base_stream.read(length)
-
+    ##end
     def write_bytes(self, value):
         self.base_stream.write(value)
-
+    ##end
     def unpack(self, fmt):
         return struct.unpack(fmt, self.read_bytes(struct.calcsize(fmt)))
-
+    ##end
     def pack(self, fmt, *data):
         return self.write_bytes(struct.pack(fmt, *data))
-
+    ##end
     def read_string(self):
         (length,) = self.unpack("<I")
         return self.read_bytes(length).decode("utf8")
-
+    ##end
     def write_string(self, s):
         self.pack("<I", len(s))
         self.write_bytes(s.encode("utf8"))
-
+    ##end
     # https://blog.roblox.com/2013/05/condense-and-compress-our-custom-binary-file-format/
     def read_interleaved(self, count: int, size: int = 4):
         return (
@@ -58,27 +46,27 @@ class BinaryStream:
             .reshape(size, count)
             .T.flatten()
         )
-
+    ##end
     def read_ints(self, count):
         return decode_int(self.read_interleaved(count).view(self.UINT32))
-
+    ##end
     def write_ints(self, values):
         self.pack(f"<{len(values)}f", *values)
-
+    ##end
     def read_floats(self, count):
         return self.read_ints(count).view(self.F32)
-
+    ##end
     def write_floats(self, values):
         self.pack(f"<{len(values)}f", *values)
-
+    ##end
     def read_instance_ids(self, count):
         """Reads and accumulates an interleaved buffer of integers."""
         return self.read_ints(count).cumsum()
-
+    ##end
     def write_instance_ids(self, values):
         """Accumulatively writes an interleaved array of integers."""
         self.write_ints(np.ediff1d(np.asarray(values), to_begin=values[0]))
-
+    ##end
     # http://stackoverflow.com/questions/32774910/clean-way-to-read-a-null-terminated-c-style-string-from-a-file
     def readCString(self):
         buf = bytearray()
@@ -88,36 +76,41 @@ class BinaryStream:
                 return buf
             else:
                 buf.extend(b)
-
+            ##end
+        ##end
+    ##end
     def writeCString(self, string):
         self.write_bytes(string)
         self.write_bytes(b"\0")
-
-
+    ##end
+##end
 class META:
     def __init__(self):
         self.Data = {}
-
+    ##end
     def deserialize(self, stream: BinaryStream, file: BinaryRobloxFile):
         (numEntries,) = stream.unpack("<i")
         for i in range(numEntries):
             key = stream.read_string()
             value = stream.read_string()
             self.Data[key] = value
+        ##end
         file.META = self
-
+    ##end
     def serialize(self, stream: BinaryStream):
         stream.pack("<i", len(self.Data))
         for key, value in self.Data.items():
             stream.write_string(key)
             stream.write_string(value)
-
+        ##end
+    ##end
     def dump(self):
         print(f"- NumEntries: {len(self.Data)}")
         for key, value in self.Data.items():
             print(f"  - {key}: {value}")
-
-
+        ##end
+    ##end
+##end
 class INST:
     def __init__(self):
         self.ClassIndex = 0
@@ -126,17 +119,16 @@ class INST:
         self.RootedServices = []
         self.NumInstances = 0
         self.InstanceIds = []
-
+    ##end
     def __str__(self):
         return f"{self.ClassIndex}: {self.ClassName}x{self.NumInstances}"
-
+    ##end
     def deserialize(self, stream: BinaryStream, file: BinaryRobloxFile):
         (self.ClassIndex,) = stream.unpack("<i")
         self.ClassName = stream.read_string()
         self.IsService, self.NumInstances = stream.unpack("<bi")
         self.InstanceIds = stream.read_instance_ids(self.NumInstances)
         file.Classes[self.ClassIndex] = self
-
         # Type instType = Type.GetType($"RobloxFiles.{ClassName}");
         # if instType is None:
         #     RobloxFile.LogError($"INST - Unknown class: {ClassName} while reading INST chunk.");
@@ -147,7 +139,8 @@ class INST:
             for i in range(self.NumInstances):
                 isRooted = stream.unpack("<b")
                 self.RootedServices.append(isRooted)
-
+            ##endif
+        ##endif
         for i in range(self.NumInstances):
             instId = self.InstanceIds[i]
             # inst = Activator.CreateInstance(instType) as Instance;
@@ -157,8 +150,9 @@ class INST:
             if self.IsService:
                 isRooted = self.RootedServices[i]
                 inst.Parent = file if isRooted else None
+            ##endif
             file.Instances[instId] = inst
-
+        ##end
         def serialize(self, stream: BinaryStream, file: BinaryRobloxFile):
             stream.pack("<i", self.ClassIndex)
             stream.write_string(self.ClassName)
@@ -169,18 +163,21 @@ class INST:
                     # Instance service = file.Instances[instId];
                     # writer.Write(service.Parent == file);
                     stream.pack("<b", False)
-
+                ##end
+            ##endif
+        ##end
         def dump(self):
             print(f"- ClassIndex:   {self.ClassIndex}")
             print(f"- ClassName:    {self.ClassName}")
             print(f"- IsService:    {self.IsService}")
-
             if self.IsService and self.RootedServices is not None:
                 print(f"- RootedServices: `{', '.join(self.RootedServices)}`")
-
+            ##endif
             print(f"- NumInstances: {self.NumInstances}")
             print(f"- InstanceIds: `{', '.join(self.InstanceIds)}`")
-
+        ##end
+    ##end
+##end
 
 @dataclass
 class PROP:
