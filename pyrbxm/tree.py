@@ -37,6 +37,7 @@ class PropertyType(Enum):
     OptionalCFrame     = 30
     UniqueId           = 31
     FontFace           = 32
+##end
 # fmt: on
 
 
@@ -77,7 +78,7 @@ class Instance:
         """ The public readonly access point of the attributes on this Instance. """
         # self.Attributes: RbxAttributes = RbxAttributes()
         # self.RefreshProperties()
-
+    ##end
     # @property
     # def ClassName(self):
     #     """The ClassName of this Instance."""
@@ -86,16 +87,16 @@ class Instance:
     def __str__(self):
         """The name of this Instance, if a Name property is defined."""
         return self.Name
-
+    ##end
     @property
     def AttributesSerialize(self) -> bytes:
         """The internal serialized data of this Instance's attributes"""
         return self.Attributes.Save()
-
+    ##end
     @AttributesSerialize.setter
     def AttributesSerialize(self, value: bytes):
         self.Attributes.Load(value)
-    ##endif
+    ##end
     @property
     def SerializedTags(self) -> bytes:
         """
@@ -106,6 +107,7 @@ class Instance:
             return None
         ##endif
         return "\0".join(self.Tags).encode()
+    ##end
     @SerializedTags.setter
     def SerializedTags(self, value: bytes):
         """
