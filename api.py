@@ -10,7 +10,62 @@ def getRequest():
 #Dynamic Pages
 @app.route('/')
 def index():
-    myQuery = getParams(request.url)
+    page = """
+    <p id='change' class='red3 center ta_c'>Here you will find links to the Reference Documents</p>
+    <p class='red3 center'>
+        <!--BEGIN DOCUMENTS PAGES-->
+        Reference Documents:<br>
+        - <a href='/info.asp'>Info</a><br>
+        - <a href='/server.py'>Server</a><br>
+        - <a href='/terms.asp'>Terms & Conditions</a><br>
+        - <a href='/contact.asp'>Contact</a><br>
+        <!--END DOCUMENT PAGES-->
+    </p>
+    """
+    theid = None
+    myQuery = getParams(str(request.url))
+    if (myQuery!=None):
+        idq = str(myQuery[0])
+        tyq = None
+        if (len(myQuery)>1):
+            tyq = str(myQuery[1])
+        ##endif
+        if (idq!=None):
+            theid=int(idq.split('=')[1])
+            if (theid!=None):
+                if (tyq==None or tyq.lower()=='type=model'):
+                    page = """
+                    <p id='change' class='red3 center ta_c'>AssetId automatically detected. Downloading..</p>
+                    <script>
+                        setTimeout(function(){
+                            document.location.replace('/')
+                        },2000)
+                    </script>
+                    """
+                    asset = insertserver.downloadAsset(theid)
+                elif (tyq.lower()=='type=audio' or tyq.lower()=='type=sound'):
+                    asset = None
+                ##endif
+            ##endif
+        ##endif
+    ##endif
+    return """
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Insert Cloud API - Welcome</title>
+        <link rel='icon' href='/images/favicon.ico'/>
+        <link rel='stylesheet' href='/css/styles-main.css'/>
+    </head>
+    <body>
+        <div id='page_content' class='center a_up'>
+            <h1 class='red1 center'>Welcome!</h1>
+            <h2 class='red2 center ta_c'>Welcome to the Insert Cloud landing page!</h2>
+            """+page+"""
+        </div>
+    </body>
+</html>
+"""
 ##end
 @app.route('/api/')
 def downloaderPage():
@@ -23,7 +78,7 @@ def downloaderPage():
             tyq=myQuery[1]
         ##endif
         if (idq!=None):
-            theid=int(idq)
+            theid=int(idq.split('=')[1])
             if (theid!=None):
                 if (tyq==None or tyq.lower()=='model'):
                     asset = insertserver.downloadAsset(theid)
