@@ -13,11 +13,29 @@ def index():
     myQuery = getParams(request.url)
 ##end
 @app.route('/api/')
-def api():
+def downloaderPage():
     myQuery = getParams(request.url)
+    theid=None
+    if (myQuery!=None):
+        idq = myQuery[0]
+        tyq = None
+        if (len(myQuery)>1):
+            tyq=myQuery[1]
+        ##endif
+        if (idq!=None):
+            theid=int(idq)
+            if (theid!=None):
+                if (tyq==None or tyq.lower()=='model'):
+                    asset = insertserver.downloadAsset(theid)
+                elif (tyq.lower()=='audio' or tyq.lower()=='sound'):
+                    
+                ##endif
+            ##endif
+        ##endif
+    ##endif
 ##end
 @app.route('/api/parser.py')
-def compilerPage():
+def parserPage():
     myQuery = getParams(request.url)
     if (myQuery!=None):
         datq = myQuery[0]
@@ -29,6 +47,7 @@ def compilerPage():
         ##endif
     ##endif
 ##end
+#Static Pages
 
 #Server stuff
 def getParams(url):
@@ -52,3 +71,4 @@ class insertserver:
         ##endif
     ##end
 ##end
+
