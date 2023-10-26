@@ -1,5 +1,5 @@
 #Modules & Flask
-import base64,os,sys,requests,robloxapi
+import base64,os,sys,requests,restartHandler,robloxapi
 from flask import Flask,jsonify,request
 #DEFINE APP
 app = Flask(__name__)
@@ -69,6 +69,9 @@ class insertserver:
             asset.write(bytearray(rawData))
             return asset
         ##endif
+    ##end
+    def restart():
+        restartHandler.restart(request)
     ##end
 ##end
 
