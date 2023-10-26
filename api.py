@@ -16,7 +16,7 @@ def index():
 def api():
     myQuery = getParams(request.url)
 ##end
-@app.route('/parser.py')
+@app.route('/api/parser.py')
 def compilerPage():
     myQuery = getParams(request.url)
     if (myQuery!=None):
