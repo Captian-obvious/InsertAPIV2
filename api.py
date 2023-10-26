@@ -28,7 +28,7 @@ def downloaderPage():
                 if (tyq==None or tyq.lower()=='model'):
                     asset = insertserver.downloadAsset(theid)
                 elif (tyq.lower()=='audio' or tyq.lower()=='sound'):
-                    
+                    asset = None
                 ##endif
             ##endif
         ##endif
