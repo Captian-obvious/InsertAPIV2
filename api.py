@@ -117,6 +117,10 @@ def parserPage():
         ##endif
     ##endif
 ##end
+@app.route('/credits.asp')
+def creditsPage():
+    return insertserver.credits()
+##end
 #Static Pages
 
 #Server stuff
@@ -132,20 +136,20 @@ def getParams(url):
 class insertserver:
     def downloadAsset(assetid,type='model'):
         if (type=='model'):
-            url = 'https://assetdelivery.roblox.com/v1/asset/?id='+assetid
+            url = 'https://assetdelivery.roblox.com/v1/asset/?id='+str(assetid)
             req = requests.get(url)
             if (req.status_code==200):
                 rawData = req.content
-                asset = open('api/assets/v1/'+assetid,'wb')
+                asset = open('api/assets/v1/'+str(assetid),'wb')
                 asset.write(bytearray(rawData))
                 return asset
             ##endif
         elif (type=='audio'):
-            url = 'https://api.hyra.io/audio/'+assetid
+            url = 'https://api.hyra.io/audio/'+str(assetid)
             req = requests.get(url)
             if (req.status_code==200):
                 rawData = req.content
-                asset = open('api/assets/v1/'+assetid,'wb')
+                asset = open('api/assets/v1/'+str(assetid),'wb')
                 asset.write(bytearray(rawData))
                 return asset
             ##endif
@@ -192,4 +196,3 @@ class insertserver:
 """
     ##end
 ##end
-
