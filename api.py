@@ -130,14 +130,25 @@ def getParams(url):
 ##end
 
 class insertserver:
-    def downloadAsset(assetid):
-        url = 'https://assetdelivery.roblox.com/v1/asset/?id='+assetid
-        req = requests.get(url)
-        if (req.status_code==200):
-            rawData = req.content
-            asset = open('api/assets/v1/'+assetid,'wb')
-            asset.write(bytearray(rawData))
-            return asset
+    def downloadAsset(assetid,type='model'):
+        if (type=='model'):
+            url = 'https://assetdelivery.roblox.com/v1/asset/?id='+assetid
+            req = requests.get(url)
+            if (req.status_code==200):
+                rawData = req.content
+                asset = open('api/assets/v1/'+assetid,'wb')
+                asset.write(bytearray(rawData))
+                return asset
+            ##endif
+        elif (type=='audio'):
+            url = 'https://api.hyra.io/audio/'+assetid
+            req = requests.get(url)
+            if (req.status_code==200):
+                rawData = req.content
+                asset = open('api/assets/v1/'+assetid,'wb')
+                asset.write(bytearray(rawData))
+                return asset
+            ##endif
         ##endif
     ##end
     def restart():
