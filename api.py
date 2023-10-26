@@ -125,12 +125,11 @@ def creditsPage():
 
 #Server stuff
 def getParams(url):
-    params = None
-    query = url.split('?')[1]
-    if (query!=None):
+    if (len(url.split('?'))>1):
+        query = url.split('?')[1]
         params = query.split('&')
+        return params
     ##endif
-    return params
 ##end
 
 class insertserver:
