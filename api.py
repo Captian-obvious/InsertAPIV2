@@ -88,9 +88,9 @@ class insertserver:
             <p class='red1 center'>
                 <u>Management:</u><br>
                 <ul>
-                    <li>@CaptianObvious - App Manager</li>
-                    <li>@Robuyasu - App Contributer</li>
-                    <li>Fallen - Testing and Standardization</li>
+                    <li>@CaptianObvious - Lead Developer</li>
+                    <li>@UnknownUser (terminated) - Deployment Manager</li>
+                    <li>Fallen</li>
                 </ul><br>
                 <u>Maintained By:</u>
                 <ul>
@@ -99,6 +99,10 @@ class insertserver:
                 <u>Developed by:</u>
                 <ul>
                     <li>@CaptianObvious</li>
+                </ul>
+                <u>Testing and Standardization</u>
+                <ul>
+                    <li>Fallen</li>
                 </ul>
             </p>
         </div>
