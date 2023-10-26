@@ -7,6 +7,158 @@ app = Flask(__name__)
 def getRequest():
     return request
 ##end
+#Error Pages
+
+def bad_request(e):
+    return """
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Woah there!</title>
+        <link rel='icon' href='/images/favicon.ico'/>
+        <link rel='icon' sizes='32x32' href='favicon.png'/>
+        <link rel='icon' sizes='96x96' href='favicon-large.png'/>
+        <link rel='stylesheet' href='/css/styles-main.css'/>
+    </head>
+    <body>
+        <div class='center va_c'>
+            <h1 class='red1 center'>Woah there!</h1>
+            <h2 class='red1 center'>
+                This server was not able to understand your request,<br>
+                check your request for errors and try again.
+            </h2>
+            <p class='red2 center'>ERR: HTTP Bad_Request (400)</p>
+            <!--<script id='EZlua_Badge' src='//sdd2.w3spaces.com/js/badge.js'></script>-->
+        </div>
+    </body>
+</html>
+"""
+##end
+def forbidden(e):
+    return """
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Forbidden!</title>
+        <link rel='icon' href='/images/favicon.ico'/>
+        <link rel='icon' sizes='32x32' href='favicon.png'/>
+        <link rel='icon' sizes='96x96' href='favicon-large.png'/>
+        <link rel='stylesheet' href='/css/styles-main.css'/>
+    </head>
+    <body>
+        <div class='center va_c'>
+            <h1 class='red1 center'>Access Denied!</h1>
+            <h2 class='red1 center'>
+                You do not have permission to view this page. Sorry!
+            </h2>
+            <p class='red2 center'>ERR: HTTP Forbidden (403)</p>
+            <!--<script id='EZlua_Badge' src='//sdd2.w3spaces.com/js/badge.js'></script>-->
+        </div>
+    </body>
+</html>
+"""
+##end
+def not_found(e):
+    return """
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Uh oh!</title>
+        <link rel='icon' href='/images/favicon.ico'/>
+        <link rel='icon' sizes='32x32' href='favicon.png'/>
+        <link rel='icon' sizes='96x96' href='favicon-large.png'/>
+        <link rel='stylesheet' href='/css/styles-main.css'/>
+    </head>
+    <body>
+        <div class='center va_c'>
+            <h1 class='red1 center'>Uh oh!</h1>
+            <h2 class='red1 center'>The page you were looking for was not found on this server. Sorry!</h3>
+            <p class='red2 center'>ERR: HTTP Not_Found (404)</p>
+            <!--<script id='EZlua_Badge' src='//sdd2.w3spaces.com/js/badge.js'></script>-->
+        </div>
+    </body>
+</html>
+"""
+##end
+def access_denied(e):
+    return """
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Access Denied!</title>
+        <link rel='icon' href='/images/favicon.ico'/>
+        <link rel='icon' sizes='32x32' href='favicon.png'/>
+        <link rel='icon' sizes='96x96' href='favicon-large.png'/>
+        <link rel='stylesheet' href='/css/styles-main.css'/>
+    </head>
+    <body>
+        <div class='center va_c'>
+            <h1 class='red1 center'>Access Denied!</h1>
+            <h2 class='red1 center'>
+                Your access to this page was denied. Sorry!
+            </h2>
+            <p class='red2 center'>ERR: HTTP Access_Denied (405)</p>
+            <!--<script id='EZlua_Badge' src='//sdd2.w3spaces.com/js/badge.js'></script>-->
+        </div>
+    </body>
+</html>
+"""
+##end
+def errored(e):
+    return """
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Oh no!</title>
+        <link rel='icon' href='/images/favicon.ico'/>
+        <link rel='icon' sizes='32x32' href='favicon.png'/>
+        <link rel='icon' sizes='96x96' href='favicon-large.png'/>
+        <link rel='stylesheet' href='/css/styles-main.css'/>
+    </head>
+    <body>
+        <div class='center va_c'>
+            <h1 class='red1 center'>Uh oh!</h1>
+            <h2 class='red1 center'>
+                This server was not able to process your request.<br>
+                Possibly the server may be down or an error occured Backend.
+            </h2>
+            <p class='red2 center'>ERR: HTTP Internal_Server_Error (500)</p>
+            <!--<script id='EZlua_Badge' src='//sdd2.w3spaces.com/js/badge.js'></script>-->
+        </div>
+    </body>
+</html>
+"""
+##end
+app.register_error_handler(400, bad_request)
+app.register_error_handler(403, forbidden)
+app.register_error_handler(404, not_found)
+app.register_error_handler(405, access_denied)
+app.register_error_handler(500, errored)
 #Dynamic Pages
 @app.route('/')
 def index():
