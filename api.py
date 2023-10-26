@@ -1,5 +1,5 @@
 #Modules & Flask
-import base64,os,sys,requests,restartHandler,robloxapi
+import base64,os,server,sys,requests,robloxapi
 from flask import Flask,jsonify,request
 #DEFINE APP
 app = Flask(__name__)
@@ -71,7 +71,40 @@ class insertserver:
         ##endif
     ##end
     def restart():
-        restartHandler.restart(request)
+        server.restart(request)
+    ##end
+    def credits():
+        return """
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Insert Cloud API - Credits</title>
+        <link rel='icon' href='/images/favicon.ico'/>
+        <link rel='stylesheet' href='/css/styles-main.css'/>
+    </head>
+    <body>
+        <div id='page-content' class='center va_c'>
+            <h1 class='red1 center'>Credits: </h1>
+            <p class='red1 center'>
+                <u>Management:</u><br>
+                <ul>
+                    <li>@CaptianObvious - App Manager</li>
+                    <li>@Robuyasu - App Contributer</li>
+                    <li>Fallen - Testing and Standardization</li>
+                </ul><br>
+                <u>Maintained By:</u>
+                <ul>
+                    <li>@Robuyasu</li>
+                </ul><br>
+                <u>Developed by:</u>
+                <ul>
+                    <li>@CaptianObvious</li>
+                </ul>
+            </p>
+        </div>
+    </body>
+</html>
+"""
     ##end
 ##end
 
