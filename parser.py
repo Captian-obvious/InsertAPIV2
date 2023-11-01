@@ -7,7 +7,7 @@ def parse(file):
     with open(file, "rb") as file:
         root = BinaryRobloxFile()
         root.deserialize(file)
-        return str(file)
+        return str(root)
     ##endwith
 ##end
 ##end
