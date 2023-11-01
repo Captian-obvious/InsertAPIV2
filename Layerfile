@@ -7,7 +7,7 @@ FROM vm/ubuntu:18.04
 RUN apt-get update && apt-get install python3
 
 # Create some files
-RUN python3 pip install -m requirements.txt
+RUN pip install -m requirements.txt
 RUN python3 -m api.py
 COPY / /root
 
