@@ -22,4 +22,4 @@ RUN ls
 # Whenever someone clicks the link, we'll load this staging server and forward
 # their requests to it.
 RUN BACKGROUND python3 -m http.server 80
-EXPOSE WEBSITE https://insertapi.pages.dev
+EXPOSE WEBSITE localhost:8000
