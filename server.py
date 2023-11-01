@@ -1,5 +1,5 @@
 import base64,os,sys,requests,robloxapi
-from main import app,jsonify
+from api import app,jsonify
 #APP RESTART HANDLER
 @app.route('/api/restart/')
 def restart(request):
