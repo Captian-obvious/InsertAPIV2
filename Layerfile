@@ -7,8 +7,11 @@ FROM vm/ubuntu:18.04
 RUN apt-get update && apt-get install python3
 
 # Create some files
+RUN python -m pip install requirements.txt
+RUN python -m api.py
 RUN echo '<b>some html</b>' > hello.html
-RUN echo '<b>another file</b>' > another.html
+RUN echo '<b>some html</b>' > hello.html
+RUN echo '<b>some html</b>' > hello.html
 
 # You could also install & start a database:
 # RUN apt-get update && apt-get install postgresql
@@ -21,4 +24,4 @@ RUN ls
 # Whenever someone clicks the link, we'll load this staging server and forward
 # their requests to it.
 RUN BACKGROUND python3 -m http.server 80
-EXPOSE WEBSITE https://insertapi.pages.dev/
+EXPOSE WEBSITE http://insertapi.pages.dev
