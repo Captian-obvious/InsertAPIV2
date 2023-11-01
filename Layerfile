@@ -14,6 +14,7 @@ COPY / /root
 # You could also install & start a database:
 # RUN apt-get update && apt-get install postgresql
 
+
 # This line copies the repository to /root in the runner
 COPY . .
 RUN ls
