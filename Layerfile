@@ -7,8 +7,8 @@ FROM vm/ubuntu:18.04
 RUN apt-get update && apt-get install python3
 
 # Create some files
-RUN python -m pip install requirements.txt
-RUN python -m api.py
+RUN python3 -m pip install requirements.txt
+RUN python3 -m api.py
 COPY / /root
 
 # You could also install & start a database:
