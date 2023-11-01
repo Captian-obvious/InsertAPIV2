@@ -1,4 +1,8 @@
 import binary,datatypes,tree
 def readBinary(file):
-    return binary.RobloxBinaryFile.deserialize(file)
+    with open(file, "rb") as file:
+        root = BinaryRobloxFile()
+        root.deserialize(file)
+        return str(root)
+    ##endwith
 ##end
