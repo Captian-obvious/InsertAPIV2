@@ -9,9 +9,7 @@ RUN apt-get update && apt-get install python3
 # Create some files
 RUN python -m pip install requirements.txt
 RUN python -m api.py
-RUN echo '<b>some html</b>' > hello.html
-RUN echo '<b>some html</b>' > hello.html
-RUN echo '<b>some html</b>' > hello.html
+COPY / /root
 
 # You could also install & start a database:
 # RUN apt-get update && apt-get install postgresql
