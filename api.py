@@ -22,8 +22,8 @@ def bad_request(e):
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Woah there!</title>
         <link rel='icon' href='/images/favicon.ico'/>
-        <link rel='icon' sizes='32x32' href='favicon.png'/>
-        <link rel='icon' sizes='96x96' href='favicon-large.png'/>
+        <link rel='icon' sizes='32x32' href='/favicon.png'/>
+        <link rel='icon' sizes='96x96' href='/favicon-large.png'/>
         <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
@@ -52,8 +52,8 @@ def forbidden(e):
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Forbidden!</title>
         <link rel='icon' href='/images/favicon.ico'/>
-        <link rel='icon' sizes='32x32' href='favicon.png'/>
-        <link rel='icon' sizes='96x96' href='favicon-large.png'/>
+        <link rel='icon' sizes='32x32' href='/favicon.png'/>
+        <link rel='icon' sizes='96x96' href='/favicon-large.png'/>
         <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
@@ -81,8 +81,8 @@ def not_found(e):
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Uh oh!</title>
         <link rel='icon' href='/images/favicon.ico'/>
-        <link rel='icon' sizes='32x32' href='favicon.png'/>
-        <link rel='icon' sizes='96x96' href='favicon-large.png'/>
+        <link rel='icon' sizes='32x32' href='/favicon.png'/>
+        <link rel='icon' sizes='96x96' href='/favicon-large.png'/>
         <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
@@ -108,8 +108,8 @@ def access_denied(e):
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Access Denied!</title>
         <link rel='icon' href='/images/favicon.ico'/>
-        <link rel='icon' sizes='32x32' href='favicon.png'/>
-        <link rel='icon' sizes='96x96' href='favicon-large.png'/>
+        <link rel='icon' sizes='32x32' href='/favicon.png'/>
+        <link rel='icon' sizes='96x96' href='/favicon-large.png'/>
         <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
@@ -137,8 +137,8 @@ def errored(e):
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Oh no!</title>
         <link rel='icon' href='/images/favicon.ico'/>
-        <link rel='icon' sizes='32x32' href='favicon.png'/>
-        <link rel='icon' sizes='96x96' href='favicon-large.png'/>
+        <link rel='icon' sizes='32x32' href='/favicon.png'/>
+        <link rel='icon' sizes='96x96' href='/favicon-large.png'/>
         <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
