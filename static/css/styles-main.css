@@ -1,1 +1,89 @@
-/* Main stylesheet */
+/* Main Stylesheet */
+h1 {
+    color: #980000;
+}
+a {
+    color: #980000;
+}
+a:hover {
+    color: #ff0000;
+}
+a:visited {
+    color: #ff0000;
+}
+#code {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+}
+#editor {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    width: 100%;
+    height: 90%;
+}
+/* Themes */
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+.va_c {
+    vertical-align: middle;
+}
+.va_m {
+    vertical-align: middle;
+}
+/* Border themes */
+.border_r_s {
+    border: 3px solid red;
+}
+.border_r_d1 {
+    border: 3px dashed red;
+}
+.border_r_d2 {
+    border: 3px dotted red;
+}
+.border_g_s {
+    border: 3px solid green;
+}
+.border_g_d1 {
+    border: 3px dashed green;
+}
+.border_g_d2 {
+    border: 3px dotted green;
+}
+.border_b_s {
+    border: 3px solid blue;
+}
+.border_b_d1 {
+    border: 3px dashed blue;
+}
+.border_b_d2 {
+    border: 3px dotted blue;
+}
+/* Text Themes */
+.red1 {
+    color: #980000;
+}
+.red2 {
+    color: #cc4125;
+}
+.red3 {
+    color: #ff0000;
+}
+.ta_c {
+    text-align: center;
+}
+/* Animations */
+@keyframes anim_up {
+    from {
+        top: 50%;
+    }
+    to {
+        top: 0px;
+    }
+}
+
+.a_up {
+    animation-name: anim_up;
+}
