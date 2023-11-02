@@ -1,6 +1,6 @@
 import base64,os,pyrbxm,sys,requests,robloxapi
 from pyrxbm.binary import BinaryRobloxFile
-from api import app,getRequest
+from api import app,jsonify,getRequest
 ##class COMPILER:
 def parse(file):
     parsedString = ""
