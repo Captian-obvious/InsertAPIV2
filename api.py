@@ -266,6 +266,7 @@ def parserPage():
             s = datq.split('=')
             if (s!=None and len(s)>1):
                 data = s[1]
+                parser.parse('api/assets/v1/'+str(data))
             ##endif
         ##endif
     ##endif
