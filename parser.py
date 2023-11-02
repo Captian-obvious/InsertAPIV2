@@ -10,4 +10,6 @@ def parse(file):
         return str(root)
     ##endwith
 ##end
+def toJson(obj):
+    jsonify(obj)
 ##end
