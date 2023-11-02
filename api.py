@@ -24,7 +24,7 @@ def bad_request(e):
         <link rel='icon' href='/images/favicon.ico'/>
         <link rel='icon' sizes='32x32' href='favicon.png'/>
         <link rel='icon' sizes='96x96' href='favicon-large.png'/>
-        <link rel='stylesheet' href='/css/styles-main.css'/>
+        <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
         <div class='center va_c'>
@@ -54,7 +54,7 @@ def forbidden(e):
         <link rel='icon' href='/images/favicon.ico'/>
         <link rel='icon' sizes='32x32' href='favicon.png'/>
         <link rel='icon' sizes='96x96' href='favicon-large.png'/>
-        <link rel='stylesheet' href='/css/styles-main.css'/>
+        <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
         <div class='center va_c'>
@@ -83,7 +83,7 @@ def not_found(e):
         <link rel='icon' href='/images/favicon.ico'/>
         <link rel='icon' sizes='32x32' href='favicon.png'/>
         <link rel='icon' sizes='96x96' href='favicon-large.png'/>
-        <link rel='stylesheet' href='/css/styles-main.css'/>
+        <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
         <div class='center va_c'>
@@ -110,7 +110,7 @@ def access_denied(e):
         <link rel='icon' href='/images/favicon.ico'/>
         <link rel='icon' sizes='32x32' href='favicon.png'/>
         <link rel='icon' sizes='96x96' href='favicon-large.png'/>
-        <link rel='stylesheet' href='/css/styles-main.css'/>
+        <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
         <div class='center va_c'>
@@ -139,7 +139,7 @@ def errored(e):
         <link rel='icon' href='/images/favicon.ico'/>
         <link rel='icon' sizes='32x32' href='favicon.png'/>
         <link rel='icon' sizes='96x96' href='favicon-large.png'/>
-        <link rel='stylesheet' href='/css/styles-main.css'/>
+        <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
         <div class='center va_c'>
@@ -208,7 +208,7 @@ def index():
     <head>
         <title>Insert Cloud API - Welcome</title>
         <link rel='icon' href='/images/favicon.ico'/>
-        <link rel='stylesheet' href='/css/styles-main.css'/>
+        <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
         <div id='page_content' class='center a_up'>
@@ -247,7 +247,7 @@ def downloaderPage():
     <head>
         <title>Insert Cloud API - Asset Downloader</title>
         <link rel='icon' href='/images/favicon.ico'/>
-        <link rel='stylesheet' href='/css/styles-main.css'/>
+        <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
         <h1 class='red1'>Insert Cloud API Server: </h1>
@@ -317,7 +317,7 @@ class insertserver:
     <head>
         <title>Insert Cloud API - Credits</title>
         <link rel='icon' href='/images/favicon.ico'/>
-        <link rel='stylesheet' href='/css/styles-main.css'/>
+        <link rel='stylesheet' href='/static/css/styles-main.css'/>
     </head>
     <body>
         <div id='page-content' class='center va_c'>
