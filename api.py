@@ -252,7 +252,7 @@ def downloaderPage():
     <body>
         <h1 class='red1'>Insert Cloud API Server: </h1>
         <h2 class='red2'>Download Asset Request Recieved.</h2>
-        <p class='red3'>Asset Location: <a href='/assets/v1/"""+str(theid)+"""'>/assets/v1/"""+str(theid)+"""</a></p>
+        <p class='red3'>Asset Location: <a href='/api/assets/v1/"""+str(theid)+"""'>/api/assets/v1/"""+str(theid)+"""</a></p>
     </body>
 </html>
 """
