@@ -1,5 +1,5 @@
-import tree
-import datatypes
+import tr as tree
+import types as datatypes
 import bin as binary
 def readBinary(file):
     with open(file, "rb") as file:
