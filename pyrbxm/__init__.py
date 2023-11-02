@@ -1,6 +1,6 @@
-import .binary
-import .datatypes
-import .tree
+from .binary import *
+from .datatypes import *
+from .tree import *
 def readBinary(file):
     with open(file, "rb") as file:
         root = binary.BinaryRobloxFile()
