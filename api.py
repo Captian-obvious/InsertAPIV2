@@ -295,7 +295,7 @@ class insertserver:
                 rawData = req.content
                 asset = open('api/assets/v1/'+str(assetid),'wb')
                 asset.write(bytearray(rawData))
-                return asset
+                return bytearray(rawData)
             ##endif
         elif (type=='audio'):
             url = 'https://api.hyra.io/audio/'+str(assetid)
