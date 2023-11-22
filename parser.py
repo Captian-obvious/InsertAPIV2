@@ -4,7 +4,15 @@ from api import app,jsonify,getRequest
 HEADER = "<roblox!"
 RBXM_SIGNATURE = "\x89\xff\x0d\x0a\x1a\x0a"
 ZSTD_HEADER = "\x28\xB5\x2F\xFD"
-VALID_CHUNK_IDENTIFIERS = {"END\0":True,"INST":True,"META":True,"PRNT":True,"PROP":True,"SIGN":True,"SSTR":True}
+VALID_CHUNK_IDENTIFIERS = {
+    "END\0":True,
+    "INST":True,
+    "META":True,
+    "PRNT":True,
+    "PROP":True,
+    "SIGN":True,
+    "SSTR":True
+}
 def createTable(length,val):
     arr=[]
     for i in range(length):
