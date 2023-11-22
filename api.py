@@ -285,6 +285,19 @@ def getParams(url):
         return params
     ##endif
 ##end
+def getParam(url,key):
+    result=None
+    params=getParams(url)
+    if (len(params)>1):
+        for i in range(1,len(params)):
+            param=params[i-1]
+            if (param!=None and param.split("=")[0]==key):
+                result=param
+            ##endif
+        ##end
+    ##endif
+    return result
+##end
 
 class insertserver:
     def downloadAsset(assetid,type='model'):
