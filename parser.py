@@ -4,6 +4,13 @@ from api import app,jsonify,getRequest
 HEADER = "<roblox!"
 RBXM_SIGNATURE = "\x89\xff\x0d\x0a\x1a\x0a"
 ZSTD_HEADER = "\x28\xB5\x2F\xFD"
+def createTable(length,val):
+    arr=[]
+    for i in range(length):
+        arr.append(val)
+    ##end
+    return arr
+##end
 ##class COMPILER:
 def parse(file):
     parsedString = ""
@@ -15,6 +22,17 @@ def parse(file):
         ##end
         if (rbxmBuffer.read(2)!="\0\0"):
             errorHandler.error("Invalid RBXM version, if Roblox has released a newer version (unlikely), please let me know.")
+        ##end
+        classCount=rbxmBuffer.readNumber("<i4")
+        instCount=rbxmBuffer.readNumber("<i4")
+        classRefIds=createTable(classCount)
+        instRefIds=createTable(instCount)
+        class rbxm:
+            ClassRefs=classRefIds
+            InstanceRefs=instRefIds
+            Tree=[]
+            Metadata=[]
+            Strings=[]
         ##end
     ##endwith
 ##end
