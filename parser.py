@@ -1,4 +1,4 @@
-import base64,os,pyrbxm,sys,requests,robloxapi
+import base64,Buffer,LZ4,os,pyrbxm,sys,requests,robloxapi
 from pyrbxm.binary import BinaryRobloxFile
 from api import app,jsonify,getRequest
 HEADER = "<roblox!"
