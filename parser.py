@@ -8,9 +8,8 @@ ZSTD_HEADER = "\x28\xB5\x2F\xFD"
 def parse(file):
     parsedString = ""
     with open(file, "rb") as file:
-        root = BinaryRobloxFile()
-        root.deserialize(file)
-        return str(root)
+        rbxmBuffer=Buffer.new(buffer, false)
+        
     ##endwith
 ##end
 def toJson(obj):
