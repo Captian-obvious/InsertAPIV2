@@ -31,6 +31,9 @@ def new(datstr,allowOverflows):
             Stream.LastUnreadBytes=unreadBytes
             return dat
         ##end
+        def seek(datlen):
+            datlen=conditionalSet(datlen,1)
+        ##end
     ##end
     return Stream
 ##end
