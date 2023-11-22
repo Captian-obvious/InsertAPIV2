@@ -46,6 +46,17 @@ def new(datstr,allowOverflows):
             Stream.Offset=clamp(Stream.Offset+datlen,0,Stream.Length)
             Stream.IsFinished=(Stream.Offset>=Stream.Length)
         ##end
+        def append(newData):
+            Stream.Source=Stream.Source+newData
+            Stream.Length=len(Stream.Source)
+            Stream.seek(0)
+        ##end
+        def toEnd():
+            Stream.seek(Stream.Length)
+        ##end
+        def readNumber(fmt,shift):
+            fmt=conditionalSet(fmt,"I1")
+        ##end
     ##end
     return Stream
 ##end
