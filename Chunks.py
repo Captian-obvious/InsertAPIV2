@@ -2,11 +2,7 @@ import base64,Buffer,errorHandler,LZ4,os,pyrbxm,sys,requests,robloxapi
 
 def VirtualInstance(classID, className, ref):
     class vi:
-        ClassId=classID
-		ClassName=className
-		Ref=ref
-		Properties={}
-		Children={}
+        ClassId=classIDClassName=classNameRef=refProperties={}Children={}
     ##end
     return vi
 ##end
