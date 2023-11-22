@@ -8,7 +8,7 @@ ZSTD_HEADER = "\x28\xB5\x2F\xFD"
 def parse(file):
     parsedString = ""
     with open(file, "rb") as file:
-        rbxmBuffer=Buffer.new(buffer, false)
+        rbxmBuffer=Buffer.new(file, false)
         # Read metadata / header
         if (rbxmBuffer.read(8)!=HEADER or rbxmBuffer.read(6)!=RBXM_SIGNATURE):
             errorHandler.error("Provided file does not match the header of an RBXM file.")
