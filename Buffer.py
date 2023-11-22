@@ -56,6 +56,10 @@ def new(datstr,allowOverflows):
         ##end
         def readNumber(fmt,shift):
             fmt=conditionalSet(fmt,"I1")
+            packsize=struct.calcsize(fmt)
+            chunk=Stream.read(packsize,shift)
+            n=struct.unpack(fmt, chunk)
+            return n
         ##end
     ##end
     return Stream
