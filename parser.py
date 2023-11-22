@@ -13,6 +13,9 @@ def parse(file):
         if (rbxmBuffer.read(8)!=HEADER or rbxmBuffer.read(6)!=RBXM_SIGNATURE):
             errorHandler.error("Provided file does not match the header of an RBXM file.")
         ##end
+        if (rbxmBuffer.read(2)!="\0\0"):
+            errorHandler.error("Invalid RBXM version, if Roblox has released a newer version (unlikely), please let me know.")
+        ##end
     ##endwith
 ##end
 def toJson(obj):
