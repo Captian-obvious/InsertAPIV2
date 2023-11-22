@@ -1,4 +1,4 @@
-import base64,Buffer,errorHandler,LZ4,os,pyrbxm,sys,requests,robloxapi
+import base64,Buffer,Chunks,errorHandler,LZ4,os,pyrbxm,sys,requests,robloxapi
 from pyrbxm.binary import BinaryRobloxFile
 from api import app,jsonify,getRequest
 HEADER = "<roblox!"
@@ -13,12 +13,31 @@ VALID_CHUNK_IDENTIFIERS = {
     "SIGN":True,
     "SSTR":True
 }
+CHUNK_MODULES={
+    "INST":Chunks.INST,
+    "META":Chunks.META,
+    "PRNT":Chunks.PRNT,
+    "PROP":Chunks.PROP,
+    "SSTR":Chunks.SSTR
+}
 def createTable(length,val):
     arr=[]
     for i in range(length):
         arr.append(val)
     ##end
     return arr
+##end
+def procChunkType(chunkStore,id,rbxm):
+    chunks=chunkStore[id]
+    f=CHUNK_MODULES[id]
+    if (chunks and f):
+        for x in range(len(chunks)):
+            chunk=chunks[x]
+            if (chunk!=None):
+                f(chunk, rbxm)
+            ##endif
+        ##end
+    ##endif
 ##end
 ##class COMPILER:
 def parse(file):
