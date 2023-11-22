@@ -24,13 +24,13 @@ def decompress(lz4data):
                 if (nextByte!=0xFF):
                     ifinish=True
                 ##endif
-                literal = inputStream.read(litLen)
-                outputStream.append(literal)
-                outputStream.toEnd()
-                if (outputStream.Length<decompressedLen):
-                    offset=struct.unpack("<I2",inputStream.read(2))
-                ##endif
             ##end
+        ##endif
+        literal = inputStream.read(litLen)
+        outputStream.append(literal)
+        outputStream.toEnd()
+        if (outputStream.Length<decompressedLen):
+            offset=struct.unpack("<I2",inputStream.read(2))   
         ##endif
     ##end
 ##end
