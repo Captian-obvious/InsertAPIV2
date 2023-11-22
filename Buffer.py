@@ -1,4 +1,4 @@
-import base64,errorHandler,struct
+import base64,errorHandler,os,pyrbxm,struct,sys,requests,robloxapi
 
 def conditionalSet(var,el):
     if (var!=None):
