@@ -25,7 +25,7 @@ def new(datstr,allowOverflows):
             if (unreadBytes>0 and Stream.AllowOverflows!=True):
                 errorHandler.error("Buffer went out of bounds and AllowOverflows is false")
             ##end
-    		if (shift==True):
+            if (shift==True):
                 Stream.seek(datlen)
     		##end
             Stream.LastUnreadBytes=unreadBytes
