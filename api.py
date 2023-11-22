@@ -288,7 +288,7 @@ def getParams(url):
 def getParam(url,key):
     result=None
     params=getParams(url)
-    if (len(params)>1):
+    if (len(params)>0):
         for i in range(1,len(params)):
             param=params[i-1]
             if (param!=None and param.split("=")[0]==key):
