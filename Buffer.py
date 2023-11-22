@@ -1,10 +1,20 @@
 import base64,errorHandler,struct
 
-def conditionSet(var,el):
+def conditionalSet(var,el):
     if (var!=None):
         return var
     else:
         return el
+    ##endif
+##end
+
+def clamp(n,min,max):
+    if (n<min):
+        return min
+    elif (n>max):
+        return max
+    else:
+        return n
     ##endif
 ##end
 
@@ -33,6 +43,8 @@ def new(datstr,allowOverflows):
         ##end
         def seek(datlen):
             datlen=conditionalSet(datlen,1)
+            Stream.Offset=clamp(Stream.Offset+datlen,0,Stream.Length)
+            Stream.IsFinished=(Stream.Offset>=Stream.Length)
         ##end
     ##end
     return Stream
