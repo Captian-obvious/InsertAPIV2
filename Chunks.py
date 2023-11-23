@@ -76,6 +76,28 @@ def PRNT(chunk, rbxm):
 ##end
 def PROP(chunk, rbxm):
     buffer=chunk.Data
+    classID=buffer.readNumber("<I4")
+    classref=rbxm.ClassRefs[classID-1]
+    refs=classref.Refs
+    sizeof=classref.Sizeof
+    name=basicTypes.String(buffer)
+    optTypeIdCheck=ord(buffer.read(1, False)) == 0x1E
+    if (optTypeIdCheck):
+        buffer.seek(1)
+    ##endif
+    typeID=ord(buffer.read())
+    properties=[]
+    if (typeID == 0x01 or typeID == 0x1D):
+        for i in range(sizeof):
+            properties[i]=basicTypes.String(buffer)
+        ##end
+    elif (typeID==0x02):
+        for i in range(sizeof):
+            properties[i]=buffer.read()!="\0"
+        ##end
+    elif (typeID==0x03):
+        properties=basicTypes.Int32Array(buffer, sizeof)
+    ##endif
 ##end
 def SSTR(chunk, rbxm):
     buffer=chunk.Data
