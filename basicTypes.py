@@ -6,6 +6,16 @@ def conditionalSet(condition,val1,val2):
         return val2
     ##endif
 ##end
+def listToString(s,sep,i,j):
+    str1=""
+    for ele in s:
+        str1=str1+ele
+        if (sep!=None):
+            str1=str1+sep
+        ##endif
+    ##end
+    return str1
+##end
 def lrotate(n,d):
     return (n << d)|(n >> (32 - d))
 ##end
@@ -38,5 +48,15 @@ def InterleaveArrayWithSize(buffer, count, sizeof):
     if (count<0):
         return Buffer.new("", False)
     ##endif
-    stream = buffer.read(count * sizeof)
+    stream=buffer.read(count * sizeof)
+    out=createTable(count)
+    for i in range(count):
+        chunk=createTable(sizeof)
+        for s in range(sizeof):
+            bitPos=i+(count*s)
+            chunk[s]=stream[bitPos:bitPos+1]
+        ##end
+        out[i]=concat(chunk)
+    ##end
+    return Buffer.new(concat(out),False)
 ##end
