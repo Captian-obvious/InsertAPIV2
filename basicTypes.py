@@ -22,3 +22,21 @@ def rbxF32(x):
 def String(buffer):
     return buffer.read(buffer.readNumber("<I4"))
 ##end
+def Int32(buffer):
+    return transformInt(buffer.readNumber(">I4"))
+##end
+def Int64(buffer):
+    return transformInt(buffer.readNumber(">I8"))
+##end
+def Float32(buffer):
+    return rbxF32(buffer.readNumber(">I4"))
+##end
+def Float64(buffer):
+    return buffer.readNumber("<d")
+##end
+def InterleaveArrayWithSize(buffer, count, sizeof):
+    if (count<0):
+        return Buffer.new("", False)
+    ##endif
+    stream = buffer.read(count * sizeof)
+##end
