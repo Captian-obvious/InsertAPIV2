@@ -12,7 +12,21 @@ def VirtualInstance(classID, className, ref):
 ##end
 
 def INST(chunk, rbxm):
-    buf=chunk.Data
-    ClassID=buf:readNumber("<I4")
-    ClassName=BasicTypes.String(buf)
+    buffer=chunk.Data
+    ClassID=buffer.readNumber("<I4")
+    ClassName=basicTypes.String(buffer)
+    if (buffer.read()=="\1"):
+        chunk.Error("Attempt to insert binary model with services")
+    ##endif
+    count=buffer.readNumber("<I4")
+    refs=basicTypes.RefArray(buffer, count)
+    class theclass:
+        Name=ClassName,
+		Sizeof=count,
+		Refs=refs
+    ##end
+    rbxm.ClassRefs[ClassID]=theclass
+    for ref in refs:
+        rbxm.InstanceRefs[ref]=VirtualInstance(ClassID, ClassName, ref)
+    ##end
 ##end
