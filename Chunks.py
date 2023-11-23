@@ -64,3 +64,14 @@ def PRNT(chunk, rbxm):
 def PROP(chunk, rbxm):
     buffer=chunk.Data
 ##end
+def SSTR(chunk, rbxm):
+    buffer=chunk.Data
+    ver=buffer.readNumber("<I4")
+    if (ver!=0):
+        chunk.Error("Invalid SSTR version")
+    ##endif
+    for i in range(buffer.readNumber("<I4")):
+        buffer.read(16)
+        rbxm.Strings[i-1]=basicTypes.String(buffer)
+    ##end
+##end
