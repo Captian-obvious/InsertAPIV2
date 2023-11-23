@@ -10,7 +10,6 @@ def VirtualInstance(classID, className, ref):
     ##end
     return vi
 ##end
-
 def INST(chunk, rbxm):
     buffer=chunk.Data
     ClassID=buffer.readNumber("<I4")
@@ -37,4 +36,14 @@ def META(chunk, rbxm):
         v=basicTypes.String(buffer)
         rbxm.Metadata[k]=v
     ##end
+##end
+def PRNT(chunk, rbxm):
+    buffer=chunk.Data
+    ver=buffer.read()
+    if (ver!="\0"):
+        chunk.Error("Invalid PRNT version")
+    ##endif
+    count=buffer.readNumber("<I4")
+    child_refs=basicTypes.RefArray(buffer, count)
+    parent_refs=basicTypes.RefArray(buffer, count)
 ##end
