@@ -1,4 +1,11 @@
 import base64,Buffer,errorHandler,os,pyrbxm,struct,sys,requests,robloxapi
+def createTable(length,val):
+    arr=[]
+    for i in range(length):
+        arr.append(val)
+    ##end
+    return arr
+##end
 def conditionalSet(condition,val1,val2):
     if ((condition)==True):
         return val1
@@ -68,6 +75,53 @@ def unsignedIntArray(buffer, count):
     strings=InterleaveArrayWithSize(buffer, count, 4)
     for i in range(count):
         o[i-1]=strings.readNumber("<I4")
+    ##end
+    return o
+##end
+def Int32Array(buffer, count):
+    if (count<0):
+        return []
+    ##endif
+    o=createTable(count)
+    strings=InterleaveArrayWithSize(buffer, count, 4)
+    for i in range(count):
+        o[i-1]=Int32(strings)
+    ##end
+    return o
+##end
+def Int64Array(buffer, count):
+    if (count<0):
+        return []
+    ##endif
+    o=createTable(count)
+    strings=InterleaveArrayWithSize(buffer, count, 8)
+    for i in range(count):
+        o[i-1]=Int64(strings)
+    ##end
+    return o
+##end
+def RbxF32Array(buffer, count):
+    if (count<0):
+        return []
+    ##endif
+    o=createTable(count)
+    strings=InterleaveArrayWithSize(buffer, count, 4)
+    for i in range(count):
+        o[i-1]=Float32(strings)
+    ##end
+    return o
+##end
+def RefArray(buffer,count):
+    if (count<0):
+        return []
+    ##endif
+    o=createTable(count)
+    refs=Int32Array(buffer, count)
+    last=0
+    for i in range(count):
+        ref=last+refs[i-1]
+        o[i]=ref
+        last=ref
     ##end
     return o
 ##end
