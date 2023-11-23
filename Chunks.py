@@ -1,5 +1,18 @@
 import base64,basicTypes,Buffer,errorHandler,LZ4,os,pyrbxm,sys,requests,robloxapi
-
+def createTable(length,val):
+    arr=[]
+    for i in range(length):
+        arr.append(val)
+    ##end
+    return arr
+##end
+def conditionalSet(condition,val1,val2):
+    if ((condition)==True):
+        return val1
+    else:
+        return val2
+    ##endif
+##end
 def VirtualInstance(classID, className, ref):
     class vi:
         ClassId=classID
