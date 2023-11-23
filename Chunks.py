@@ -6,6 +6,13 @@ def createTable(length,val):
     ##end
     return arr
 ##end
+def extract(byte,field,width):
+    shifted_number=number >> (length-1)
+    mask = (1 << field) - 1
+    extracted_bits=shifted_number & mask
+    extracted_number=bin(extracted_bits)[2:]
+    decimal_value=int(extracted_number, 2)
+##end
 def conditionalSet(condition,val1,val2):
     if ((condition)==True):
         return val1
@@ -27,7 +34,7 @@ def parseBitFlag(byte, bitFlag):
     output=[]
     for i in range(0,7):
         bit=2^i
-        if (bit32.extract(byte,bit)):
+        if (extract(byte,bit)):
             output.insert(i,bitFlag[bit])
         ##endif
     ##end
