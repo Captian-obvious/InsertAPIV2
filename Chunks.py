@@ -61,3 +61,6 @@ def PRNT(chunk, rbxm):
         parentTable.append(child)
     ##end
 ##end
+def PROP(chunk, rbxm):
+    buffer=chunk.Data
+##end
