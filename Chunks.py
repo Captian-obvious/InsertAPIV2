@@ -151,7 +151,38 @@ def PROP(chunk, rbxm):
             properties[i-1]=parseBitFlag(byte, AXES_BIT_FLAG)
         ##end
     elif (typeID==0x0B):
-        
+        ints=basicTypes.unsignedIntArray(buffer, sizeof)
+        for i in range(sizeof):
+            properties[i-1]={"value":ints[i]}
+        ##end
+    elif (typeID==0x0C):
+        r=basicTypes.RbxF32Array(buffer, sizeof)
+        g=basicTypes.RbxF32Array(buffer, sizeof)
+        b=basicTypes.RbxF32Array(buffer, sizeof)
+        for i in range(sizeof):
+            properties[i-1]={"r":r,"g":g,"b":b}
+        ##end
+    elif (typeID==0x0D):
+        x=basicTypes.RbxF32Array(buffer, sizeof)
+        y=basicTypes.RbxF32Array(buffer, sizeof)
+        for i in range(sizeof):
+            properties[i-1]={"x":x,"y":y}
+        ##end
+    elif (typeID==0x0E):
+        x=BasicTypes.RbxF32Array(buffer, sizeof)
+        y=BasicTypes.RbxF32Array(buffer, sizeof)
+        z=BasicTypes.RbxF32Array(buffer, sizeof)
+        for i in range(sizeof):
+            properties[i-1]={"x":x,"y":y,"z":z}
+        ##end
+    elif (typeID==0x10):
+        matricies=createTable(sizeof)
+        for i in range(sizeof):
+            rawOrientation=ord(buffer.read())
+            if (rawOrientation>0):
+                orientID=rawOrientation - 1
+            ##endif
+        ##end
     ##endif
 ##end
 def SSTR(chunk, rbxm):
