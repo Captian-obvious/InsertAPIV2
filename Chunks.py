@@ -21,7 +21,9 @@ def INST(chunk, rbxm):
     count=buffer.readNumber("<I4")
     refs=basicTypes.RefArray(buffer, count)
     class theclass:
-        Name=ClassName,Sizeof=count,Refs=refs
+        Name=ClassName
+        Sizeof=count
+        Refs=refs
     ##end
     rbxm.ClassRefs[ClassID]=theclass
     for ref in refs:
