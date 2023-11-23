@@ -8,7 +8,7 @@ def createTable(length,val):
 ##end
 def extract(byte,field,width):
     width=conditionalSet(width!=None,width,1)
-    shifted_number=number >> (width-1)
+    shifted_number=byte >> (width-1)
     mask = (1 << field) - 1
     extracted_bits=shifted_number & mask
     extracted_number=bin(extracted_bits)[2:]
@@ -107,7 +107,7 @@ def PROP(chunk, rbxm):
     ##endif
     typeID=ord(buffer.read())
     properties=[]
-    if (typeID == 0x01 or typeID == 0x1D):
+    if (typeID==0x01 or typeID==0x1D):
         for i in range(sizeof):
             properties[i-1]=basicTypes.String(buffer)
         ##end
@@ -118,7 +118,7 @@ def PROP(chunk, rbxm):
     elif (typeID==0x03):
         properties=basicTypes.Int32Array(buffer, sizeof)
     elif (typeID==0x04):
-        properties=BasicTypes.RbxF32Array(buffer, sizeof)
+        properties=basicTypes.RbxF32Array(buffer, sizeof)
     elif (typeID==0x05):
         for i in range(sizeof):
             properties[i-1]=basicTypes.Float64(buffer)
