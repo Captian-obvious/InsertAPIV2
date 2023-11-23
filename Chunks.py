@@ -65,10 +65,10 @@ def PRNT(chunk, rbxm):
         child=rbxm.InstanceRefs[childID]
         parent=conditionalSet(parentID>=0,rbxm.InstanceRefs[parentID],None)
         if (not child):
-            chunk.Error(f"Could not parent {childID} to {parentID} because child {childID} was nil")
+            chunk.Error(f"Could not parent {str(childID)} to {str(parentID)} because child {str(childID)} was nil")
         ##end
         if (parentID>=0 and not parent):
-            chunk:Error(f"Could not parent {childID} to {parentID} because parent {parentID} was nil")
+            chunk.Error(f"Could not parent {childID} to {str(parentID)} because parent {str(parentID)} was nil")
         ##end
         parentTable=conditionalSet(parent!=None,parent.Children,rbxm.Tree)
         parentTable.append(child)
