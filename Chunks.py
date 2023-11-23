@@ -7,7 +7,8 @@ def createTable(length,val):
     return arr
 ##end
 def extract(byte,field,width):
-    shifted_number=number >> (length-1)
+    width=conditionalSet(width!=None,width,1)
+    shifted_number=number >> (width-1)
     mask = (1 << field) - 1
     extracted_bits=shifted_number & mask
     extracted_number=bin(extracted_bits)[2:]
