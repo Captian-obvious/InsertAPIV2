@@ -53,10 +53,21 @@ def InterleaveArrayWithSize(buffer, count, sizeof):
     for i in range(count):
         chunk=createTable(sizeof)
         for s in range(sizeof):
-            bitPos=i+(count*s)
-            chunk[s]=stream[bitPos:bitPos+1]
+            bitPos=(i-1)+(count*s)
+            chunk[s-1]=stream[bitPos:bitPos+1]
         ##end
-        out[i]=concat(chunk)
+        out[i-1]=concat(chunk)
     ##end
     return Buffer.new(concat(out),False)
+##end
+def unsignedIntArray(buffer, count):
+    if (count<0):
+        return []
+    ##endif
+    o=createTable(count)
+    strings=InterleaveArrayWithSize(buffer, count, 4)
+    for i in range(count):
+        o[i-1]=strings.readNumber("<I4")
+    ##end
+    return o
 ##end
