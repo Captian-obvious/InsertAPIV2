@@ -23,6 +23,16 @@ def VirtualInstance(classID, className, ref):
     ##end
     return vi
 ##end
+def parseBitFlag(byte, bitFlag):
+    output=[]
+    for i in range(0,7):
+        bit=2^i
+        if (bit32.extract(byte,bit)):
+            output.insert(i,bitFlag[bit])
+        ##endif
+    ##end
+    return tuple(output)
+##end
 def INST(chunk, rbxm):
     buffer=chunk.Data
     ClassID=buffer.readNumber("<I4")
@@ -74,6 +84,8 @@ def PRNT(chunk, rbxm):
         parentTable.append(child)
     ##end
 ##end
+FACES_BIT_FLAG={}
+AXES_BIT_FLAG={}
 def PROP(chunk, rbxm):
     buffer=chunk.Data
     classID=buffer.readNumber("<I4")
@@ -89,14 +101,57 @@ def PROP(chunk, rbxm):
     properties=[]
     if (typeID == 0x01 or typeID == 0x1D):
         for i in range(sizeof):
-            properties[i]=basicTypes.String(buffer)
+            properties[i-1]=basicTypes.String(buffer)
         ##end
     elif (typeID==0x02):
         for i in range(sizeof):
-            properties[i]=buffer.read()!="\0"
+            properties[i-1]=buffer.read()!="\0"
         ##end
     elif (typeID==0x03):
         properties=basicTypes.Int32Array(buffer, sizeof)
+    elif (typeID==0x04):
+        properties=BasicTypes.RbxF32Array(buffer, sizeof)
+    elif (typeID==0x05):
+        for i in range(sizeof):
+            properties[i-1]=basicTypes.Float64(buffer)
+        ##end
+    elif (typeID==0x06):
+        scale=basicTypes.RbxF32Array(buffer, sizeof)
+        offset=basicTypes.Int32Array(buffer, sizeof)
+        for i in range(sizeof):
+            properties[i-1]={'scale':scale[i],'offset':offset[i]}
+        ##end
+    elif (typeID==0x07):
+        scaleX=basicTypes.RbxF32Array(buffer, sizeof)
+        scaleY=basicTypes.RbxF32Array(buffer, sizeof)
+        offsetX=basicTypes.Int32Array(buffer, sizeof)
+        offsetY=basicTypes.Int32Array(buffer, sizeof)
+        for i in range(sizeof):
+            properties[i-1]={'scaleX':scaleX[i],'offsetX':offsetX[i],'scaleY':scaleY[i],'offsetY':offsetY[i]}
+        ##end
+    elif (typeID==0x08):
+        for i in range(sizeof):
+            properties[i-1]={
+                'oX':buffer.readNumber("<f"),
+                'oY':buffer.readNumber("<f"),
+                'oZ':buffer.readNumber("<f"),
+                'dX':buffer.readNumber("<f"),
+                'dY':buffer.readNumber("<f"),
+                'dZ':buffer.readNumber("<f")
+            }
+        ##end
+    elif (typeID==0x09):
+        for i in range(sizeof):
+            byte=ord(buffer.read())
+            properties[i-1]=parseBitFlag(byte, FACES_BIT_FLAG)
+        ##end
+    elif (typeID==0x0A):
+        for i in range(sizeof):
+            byte=ord(buffer.read())
+            properties[i-1]=parseBitFlag(byte, AXES_BIT_FLAG)
+        ##end
+    elif (typeID==0x0B):
+        
     ##endif
 ##end
 def SSTR(chunk, rbxm):
