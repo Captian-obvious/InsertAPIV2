@@ -30,3 +30,11 @@ def INST(chunk, rbxm):
         rbxm.InstanceRefs[ref]=VirtualInstance(ClassID, ClassName, ref)
     ##end
 ##end
+def META(chunk, rbxm):
+    buffer=chunk.Data
+    for i in range(buffer.readNumber("<I4")):
+        k=basicTypes.String(buffer)
+        v=basicTypes.String(buffer)
+        rbxm.Metadata[k]=v
+    ##end
+##end
