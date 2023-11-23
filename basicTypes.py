@@ -13,7 +13,7 @@ def conditionalSet(condition,val1,val2):
         return val2
     ##endif
 ##end
-def listToString(s,sep,i,j):
+def concat(s,sep,i,j):
     str1=""
     for ele in s:
         str1=str1+ele
