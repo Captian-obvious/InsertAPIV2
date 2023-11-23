@@ -169,9 +169,9 @@ def PROP(chunk, rbxm):
             properties[i-1]={"x":x,"y":y}
         ##end
     elif (typeID==0x0E):
-        x=BasicTypes.RbxF32Array(buffer, sizeof)
-        y=BasicTypes.RbxF32Array(buffer, sizeof)
-        z=BasicTypes.RbxF32Array(buffer, sizeof)
+        x=basicTypes.RbxF32Array(buffer, sizeof)
+        y=basicTypes.RbxF32Array(buffer, sizeof)
+        z=basicTypes.RbxF32Array(buffer, sizeof)
         for i in range(sizeof):
             properties[i-1]={"x":x,"y":y,"z":z}
         ##end
