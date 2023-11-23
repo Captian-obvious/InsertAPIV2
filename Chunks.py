@@ -6,7 +6,7 @@ def VirtualInstance(classID, className, ref):
         ClassName=className
         Ref=ref
         Properties={}
-        Children={}
+        Children=[]
     ##end
     return vi
 ##end
@@ -26,7 +26,7 @@ def INST(chunk, rbxm):
     ##end
     rbxm.ClassRefs[ClassID]=theclass
     for ref in refs:
-        rbxm.InstanceRefs[ref]=VirtualInstance(ClassID, ClassName, ref)
+        rbxm.InstanceRefs[ref-1]=VirtualInstance(ClassID, ClassName, ref)
     ##end
 ##end
 def META(chunk, rbxm):
@@ -46,4 +46,18 @@ def PRNT(chunk, rbxm):
     count=buffer.readNumber("<I4")
     child_refs=basicTypes.RefArray(buffer, count)
     parent_refs=basicTypes.RefArray(buffer, count)
+    for i in range(count):
+        childID=child_refs[i-1]
+        parentID=parent_refs[i-1]
+        child=rbxm.InstanceRefs[childID]
+        parent=conditionalSet(parentID>=0,rbxm.InstanceRefs[parentID],None)
+        if (not child):
+            chunk.Error(f"Could not parent {childID} to {parentID} because child {childID} was nil")
+        ##end
+        if (parentID>=0 and not parent):
+            chunk:Error(f"Could not parent {childID} to {parentID} because parent {parentID} was nil")
+        ##end
+        parentTable=conditionalSet(parent!=None,parent.Children,rbxm.Tree)
+        parentTable.append(child)
+    ##end
 ##end
