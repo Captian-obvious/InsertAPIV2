@@ -1,4 +1,3 @@
-#COMPRIMISED BY RE-DELETE!
 #Modules & Flask
 import base64,os,sys,requests,robloxapi
 from flask import Flask,jsonify,request
