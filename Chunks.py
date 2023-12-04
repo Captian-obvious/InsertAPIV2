@@ -184,9 +184,35 @@ def PROP(chunk, rbxm):
         matricies=createTable(sizeof)
         for i in range(sizeof):
             rawOrientation=ord(buffer.read())
-            if (rawOrientation>0):
-                orientID=rawOrientation - 1
+            if rawOrientation > 0:
+                orientID = rawOrientation - 1
+                R0=Vector3.fromNormalId(orientID // 6)
+                R1=Vector3.fromNormalId(orientID % 6)
+                R2=R0.Cross(R1)
+                matricies[i]=[R0, R1, R2]
+            else:
+                r00, r01, r02=buffer.readNumber("<f"), buffer.readNumber("<f"), buffer.readNumber("<f")
+                r10, r11, r12=buffer.readNumber("<f"), buffer.readNumber("<f"), buffer.readNumber("<f")
+                r20, r21, r22=buffer.readNumber("<f"), buffer.readNumber("<f"), buffer.readNumber("<f")
+                matricies[i]=[r00, r10, r20,r01, r11, r21,r02, r12, r22]
             ##endif
+        ##end
+    elif (typeID=0x11):
+        quaternions=[]
+        for i in range(sizeof):
+            quaternions.append({
+                'x': buffer.readNumber("<f"),
+                'y': buffer.readNumber("<f"),
+                'z': buffer.readNumber("<f"),
+                'w': buffer.readNumber("<f")
+            })
+        cfX=basicTypes.RbxF32Array(buffer, sizeof)
+        cfY=basicTypes.RbxF32Array(buffer, sizeof)
+        cfZ=basicTypes.RbxF32Array(buffer, sizeof)
+        properties=[]
+        for i in range(sizeof):
+            q=quaternions[i-1]
+            properties[i-1]=(CFrame.new(cfX[i], cfY[i], cfZ[i], q['x'], q['y'], q['z'], q['w']))
         ##end
     ##endif
 ##end
