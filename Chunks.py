@@ -205,7 +205,7 @@ def PROP(chunk, rbxm):
                 matricies[i]=[r00, r10, r20, r01, r11, r21, r02, r12, r22]
             ##endif
         ##end
-    elif (typeID=0x11):
+    elif (typeID==0x11):
         #QUATERNIONS
         quaternions=[]
         for i in range(sizeof):
@@ -237,14 +237,13 @@ def PROP(chunk, rbxm):
         ##end
     elif (typeID==0x15):
         #NumberSequence
-        for i in range(sizeof):
-			kpCount=buffer.readNumber("<I4")
+        for i in range(sizeof):kpCount=buffer.readNumber("<I4")
             kp=createTable(kpCount)
-			for c in range(len(kp)):
-				kp[c-1]=[buffer.readNumber("<f"),buffer.readNumber("<f"),buffer.readNumber("<f")]
-			##end
-			properties[i-1]=newNumberSequence(kpCount,kp)
-		##end
+            for c in range(len(kp)):
+                kp[c-1]=[buffer.readNumber("<f"),buffer.readNumber("<f"),buffer.readNumber("<f")]
+            ##end
+            properties[i-1]=newNumberSequence(kpCount,kp)
+        ##end
     ##endif
 ##end
 def SSTR(chunk, rbxm):
