@@ -6,14 +6,17 @@ def createTable(length,val):
     ##end
     return arr
 ##end
-def extract(byte,field,width):
+def extract(number, field, width):
     width=conditionalSet(width!=None,width,1)
-    shifted_number=byte >> (width-1)
-    mask = (1 << field) - 1
-    extracted_bits=shifted_number & mask
-    extracted_number=bin(extracted_bits)[2:]
-    decimal_value=int(extracted_number, 2)
+    mask = (1 << width) - 1
+    return (number >> field) & mask
 ##end
+# Example usage:
+number = 0b110110101010
+offset = 2
+width = 4
+result = extract_bits(number, offset, width)
+print(result)
 def conditionalSet(condition,val1,val2):
     if ((condition)==True):
         return val1
