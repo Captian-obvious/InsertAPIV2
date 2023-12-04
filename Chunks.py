@@ -38,6 +38,13 @@ def parseBitFlag(byte, bitFlag):
     ##end
     return tuple(output)
 ##end
+def newNumberSequence(count,keypoints):
+    virtualNumberSequence={
+        'keypointCount':count,
+        'keypoints':keypoints,
+    }
+    return virtualNumberSequence
+##end
 def INST(chunk, rbxm):
     buffer=chunk.Data
     ClassID=buffer.readNumber("<I4")
@@ -227,6 +234,16 @@ def PROP(chunk, rbxm):
         #Vector3int16
         for i in range(sizeof):
             properties[i-1]=[buffer.readNumber("<i2"),buffer.readNumber("<i2"),buffer.readNumber("<i2")]
+        ##end
+    elif (typeID==0x15):
+        #NumberSequence
+        for i in range(sizeof):
+			kpCount=buffer.readNumber("<I4")
+            kp=createTable(kpCount)
+			for c in range(len(kp)):
+				kp[c-1]=[buffer.readNumber("<f"),buffer.readNumber("<f"),buffer.readNumber("<f")]
+			##end
+			properties[i-1]=newNumberSequence(kpCount,kp)
 		##end
     ##endif
 ##end
