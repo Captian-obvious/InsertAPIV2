@@ -6,17 +6,17 @@ def createTable(length,val):
     ##end
     return arr
 ##end
-def extract(number, field, width):
-    width=conditionalSet(width!=None,width,1)
-    mask = (1 << width) - 1
-    return (number >> field) & mask
-##end
 def conditionalSet(condition,val1,val2):
     if ((condition)==True):
         return val1
     else:
         return val2
     ##endif
+##end
+def extract(number, field, width):
+    width=conditionalSet(width!=None,width,1)
+    mask = (1 << width) - 1
+    return (number >> field) & mask
 ##end
 def VirtualInstance(classID, className, ref):
     class vi:
