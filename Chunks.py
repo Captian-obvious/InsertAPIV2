@@ -181,6 +181,7 @@ def PROP(chunk, rbxm):
             properties[i-1]={"x":x,"y":y,"z":z}
         ##end
     elif (typeID==0x10):
+        #CFrame
         matricies=createTable(sizeof)
         for i in range(sizeof):
             rawOrientation=ord(buffer.read())
@@ -198,6 +199,7 @@ def PROP(chunk, rbxm):
             ##endif
         ##end
     elif (typeID=0x11):
+        #QUATERNIONS
         quaternions=[]
         for i in range(sizeof):
             quaternions.append({
@@ -221,6 +223,11 @@ def PROP(chunk, rbxm):
     elif (typeID==0x13):
         #Ref
         properties=basicTypes.RefArray(buffer, sizeof)
+    elif (typeID==0x14):
+        #Vector3int16
+        for i in range(sizeof):
+            properties[i-1]=[buffer.readNumber("<i2"),buffer.readNumber("<i2"),buffer.readNumber("<i2")]
+		##end
     ##endif
 ##end
 def SSTR(chunk, rbxm):
