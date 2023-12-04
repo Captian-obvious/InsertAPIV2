@@ -14,9 +14,9 @@ def conditionalSet(condition,val1,val2):
     ##endif
 ##end
 def extract(number, field, width):
-    if width!=None:
+    if (width!=None):
         width=width
-    elif:
+    else:
         width=1
     ##endif
     mask=(1 << width) - 1
