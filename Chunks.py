@@ -14,8 +14,12 @@ def conditionalSet(condition,val1,val2):
     ##endif
 ##end
 def extract(number, field, width):
-    width=conditionalSet(width!=None,width,1)
-    mask = (1 << width) - 1
+    if width!=None:
+        width=width
+    elif:
+        width=1
+    ##endif
+    mask=(1 << width) - 1
     return (number >> field) & mask
 ##end
 def VirtualInstance(classID, className, ref):
