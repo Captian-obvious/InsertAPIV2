@@ -2,6 +2,13 @@ from api import app
 def test():
     pass
 ##end
+def conditionalSet(condition,val1,val2):
+    if ((condition)==True):
+        return val1
+    else:
+        return val2
+    ##endif
+##end
 def extract(byte,field,width):
     width=conditionalSet(width!=None,width,1)
     shifted_number=byte >> (width-1)
