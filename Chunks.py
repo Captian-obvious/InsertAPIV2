@@ -215,6 +215,12 @@ def PROP(chunk, rbxm):
             q=quaternions[i-1]
             properties.append([cfX[i], cfY[i], cfZ[i], q['x'], q['y'], q['z'], q['w']])
         ##end
+    elif (typeID==0x12):
+		#Enum
+		properties=basicTypes.unsignedIntArray(buffer, sizeof)
+    elif (typeID==0x13):
+		#Ref
+		properties=basicTypes.RefArray(buffer, sizeof)
     ##endif
 ##end
 def SSTR(chunk, rbxm):
