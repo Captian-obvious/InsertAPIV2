@@ -237,7 +237,8 @@ def PROP(chunk, rbxm):
         ##end
     elif (typeID==0x15):
         #NumberSequence
-        for i in range(sizeof):kpCount=buffer.readNumber("<I4")
+        for i in range(sizeof):
+            kpCount=buffer.readNumber("<I4")
             kp=createTable(kpCount)
             for c in range(len(kp)):
                 kp[c-1]=[buffer.readNumber("<f"),buffer.readNumber("<f"),buffer.readNumber("<f")]
