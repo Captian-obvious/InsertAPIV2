@@ -11,12 +11,6 @@ def extract(number, field, width):
     mask = (1 << width) - 1
     return (number >> field) & mask
 ##end
-# Example usage:
-number = 0b110110101010
-offset = 2
-width = 4
-result = extract_bits(number, offset, width)
-print(result)
 def conditionalSet(condition,val1,val2):
     if ((condition)==True):
         return val1
