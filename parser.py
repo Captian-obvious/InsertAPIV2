@@ -28,11 +28,12 @@ def createTable(length,val):
     return arr
 ##end
 def Chunk(buffer, chunkIndex):
-    chunk={}
-    chunk['InternalID']=chunkIndex
-    chunk['Header']=buffer.read(4)
-    if (chunk['Header'] not in VALID_CHUNK_IDENTIFIERS):
-        raise ValueError(f"Invalid chunk identifier {chunk['Header']} on chunk id {chunkIndex}")
+    class chunk:
+        InternalID=chunkIndex
+        Header=buffer.read(4)
+    ##end
+    if (chunk.Header not in VALID_CHUNK_IDENTIFIERS):
+        raise ValueError(f"Invalid chunk identifier {chunk.Header} on chunk id {chunkIndex}")
     ##endif
     data=None
     lz4Header=buffer.read(16, False)
@@ -41,21 +42,21 @@ def Chunk(buffer, chunkIndex):
     reserved=lz4Header[8:12]
     zstd_check=lz4Header[12:16]
     if (reserved!=b'\x00\x00\x00\x00'):
-        raise ValueError(f"Invalid chunk header on chunk id {chunkIndex} of identifier {chunk['Header']}")
+        raise ValueError(f"Invalid chunk header on chunk id {chunkIndex} of identifier {chunk.Header}")
     ##endif
     if (compressed == 0):
-        data = buffer.read(decompressed)
+        data=buffer.read(decompressed)
     else:
         if (zstd_check==ZSTD_HEADER):
-            raise ValueError(f"Chunk id {chunkIndex} of identifier {chunk['Header']} is a ZSTD compressed chunk and cannot be decompressed")
+            raise ValueError(f"Chunk id {chunkIndex} of identifier {chunk.Header} is a ZSTD compressed chunk and cannot be decompressed")
         ##endif
-        data = LZ4.decompress(buffer.read(compressed + 12))
+        data=LZ4.decompress(buffer.read(compressed + 12))
     ##endif
-    chunk['Data']=Buffer.new(data, False)
+    chunk.Data=Buffer.new(data, False)
     def error(self, msg):
-        raise ValueError(f"[{self['Header']}:{self['InternalID']}]: {msg}")
+        raise ValueError(f"[{self.Header}:{self.InternalID}]: {msg}")
     ##end
-    chunk['Error']=error
+    setattr(chunk,'Error',error)
     return chunk
 ##end
 def procChunkType(chunkStore,id,rbxm):
